@@ -1,13 +1,11 @@
 <template>
 	<view>
-		<NoPermission/>
+		选择地址
 	</view>
 </template>
 
 <script>
-	import NoPermission from './components/NoPermission.vue'
 	export default {
-		components:{NoPermission},
 		data() {
 			return {
 				

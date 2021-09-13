@@ -15,4 +15,9 @@
 <style lang="scss">
 	/*每个页面公共css */
 	@import "uview-ui/index.scss";
+	@import "./static/iconfont.css";
+	page {
+		background-color: #f3f4f8;
+		height: 100%;
+	}
 </style>

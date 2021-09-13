@@ -114,6 +114,11 @@ export default {
 						url: 'components/suggestions'
 					});
 					break;
+					case '6':
+						uni.navigateTo({
+							url:'../login/index'
+						})
+						break;
 				default:
 					break;
 			}

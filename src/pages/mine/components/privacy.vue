@@ -48,5 +48,7 @@ export default {
 		font-size: 16px;
 		padding: 16px;
 		background: #ffffff;
+		color: #333333;
+		line-height: 24px;
 	}
 </style>
