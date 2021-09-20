@@ -21,7 +21,7 @@
 			"path": "pages/contact/inedx",
 			"style": {
 				"navigationBarTitleText": "通讯录",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": true
 			}
 
 		}, {
