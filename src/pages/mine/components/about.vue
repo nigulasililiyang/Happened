@@ -3,7 +3,7 @@
 </template>
 
 <script>
-const img = require('../../../static/images/开屏-375667.png');
+const img = require('../../../static/images/kaiping-375667.png');
 export default {
 	data() {
 		return {

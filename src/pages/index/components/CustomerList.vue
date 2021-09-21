@@ -1,6 +1,6 @@
 <template>
 	<u-cell-group>
-		<u-cell-item v-for="item in watchList" :arrow="false" bg-color="rgba(0,0,0,0)">
+		<u-cell-item v-for="item in watchList" :arrow="false" bg-color="rgba(0,0,0,0)" @click="edit">
 			<view slot="title" style="font-size:18px;color:#333333">
 				<text style="">张兰</text>
 				<text style="padding:0 4px;color:#CCCCCC;">/</text>
@@ -48,6 +48,14 @@ export default {
 		return {
 			watchList:[] //关注列表
 		};
+	},
+	methods:{
+		edit(index){
+			console.log(index);
+			if(this.current===0){
+				this.$emit('editCustomer',index)
+			}
+		}
 	}
 };
 </script>

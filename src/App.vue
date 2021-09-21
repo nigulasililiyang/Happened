@@ -22,4 +22,9 @@
 		background-color: #f3f4f8;
 		height: 100%;
 	}
+	.add-customer{
+		.uni-fab__circle--leftBottom{
+		    left: calc(50% - 27px)!important;
+		}
+	}
 </style>

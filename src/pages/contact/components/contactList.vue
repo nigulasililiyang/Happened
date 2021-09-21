@@ -380,7 +380,7 @@ movable-view.indexBar-item {
 	right: 80upx;
 	bottom: 0;
 	/* background: rgba(0, 0, 0, 0.5); */
-	background: url(../../../static/images/通讯录-img-字母轴背景.png) no-repeat;
+	background: url(../../../static/images/tongxunlu-img-zimuzhoubeijing.png) no-repeat;
 	background-size: contain;
 	width: 90px;
 	height: 90px;

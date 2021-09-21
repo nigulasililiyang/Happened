@@ -53,7 +53,7 @@
 							color: rgb(51, 51, 51);
 							background-color: #ffffff;position: absolute;"
 				>
-					<image style="width: 144px;height: 152px;position: absolute;right: 0;top: 0;" src="../../static/images/登录-img-装饰.png"></image>
+					<image style="width: 144px;height: 152px;position: absolute;right: 0;top: 0;" src="../../static/images/denglu-zhuangshi.png"></image>
 					<view style="font-size: 18px;text-align: center;padding-bottom: 11px;">巧巧用户隐私政策</view>
 					<scroll-view style="font-size: 15px;line-height: 24px;height: 320px;" scroll-y="true">
 						回用下车种维号率传管书据认团北里得场力方音矿领直传团制日值全己起水江则五长使安立年应被史记建样志切半织计例及合委作白备况完标观多这与。
