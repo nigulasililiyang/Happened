@@ -7,8 +7,17 @@ function request(requestData) {
 	const url = requestData.url;
 	var header = {};
 	var data = requestData.data;
+	if (requestData.params) {
+		data = requestData.params;
+		header['content-type'] = 'application/x-www-form-urlencoded;'
+	}
+	var baseURl = '/dev-api';
+
+	// #ifdef APP-PLUS
+	baseURl = 'https://hkqq.huakewang.com';
+	// #endif
 	return uni.request({
-		url: url,
+		url: baseURl + url,
 		data: data,
 		method: requestData.method.toUpperCase(),
 		header: header
@@ -25,14 +34,14 @@ function request(requestData) {
 			return res[0];
 		} else if (result.statusCode == 200) {
 			const data = result.data;
-			if (data.code === 401) {
+			if (data.field === 'login' && !data.success) {
 				removeToken();
 				uni.reLaunch({
 					url: "/pages/login/index"
 				})
-			} else if (data.code !== 200) {
+			} else if (!data.success) {
 				uni.showToast({
-					title: data.msg,
+					title: data.message,
 					duration: 2000,
 					icon: "none"
 				});

@@ -1,10 +1,15 @@
 <template>
 	<view class="wrap">
-		<view style="height: 48px;line-height: 48px;font-size: 16px;color: #131415;" @click="toAddress">
-			<text style="padding: 0 6px 0 23px;"><u-icon name="icon iconfont icon-a-20-dingwei"></u-icon></text>
-			<text style="padding-right: 8px;">{{ addressName }}</text>
-			<u-icon name="icon iconfont icon-a-16-jiantou-you"></u-icon>
-		</view>
+		<uni-nav-bar fixed statusBar @clickLeft="toAddress">
+			<view slot="left" style="padding: 0;display: flex;">
+				<u-icon name="icon iconfont icon-a-20-dingwei" style="padding-right: 8px;"></u-icon>
+				<view style="height: 48px;line-height: 48px;font-size: 16px;color: #131415;" @click="toAddress">
+					<text style="padding-right: 8px;">{{ addressName }}</text>
+					<u-icon name="icon iconfont icon-a-16-jiantou-you"></u-icon>
+				</view>
+			</view>
+		</uni-nav-bar>
+
 		<view class="u-tabs-box">
 			<u-tabs-swiper
 				bg-color="#F3F4F8"
@@ -19,30 +24,32 @@
 				bar-height="8"
 				gutter="32"
 			></u-tabs-swiper>
-			<u-icon name="icon iconfont icon-a-20-huishouzhan" color="#999999" size="36" style="padding-right: 18px;"
-			@click="showRecycle=true"></u-icon>
+			<u-icon name="icon iconfont icon-a-20-huishouzhan" color="#999999" size="36" style="padding-right: 18px;" @click="showRecycle = true"></u-icon>
 		</view>
 		<swiper class="swiper-box" :current="current" @change="swiperChange">
-			<swiper-item v-for="item in list">
-				<scroll-view scroll-y style="height: 100%;width: 100%;">
-					<u-field placeholder="输入姓名或手机号搜索"><u-icon slot="icon" name="icon iconfont icon-a-20-sousuo"></u-icon></u-field>
-					<CustomerList :current="current" @editCustomer="editCustomer"/>
-					<uni-fab v-if="current === 0" class="add-customer" @fabClick="addCustomer"></uni-fab>
-				</scroll-view>
+			<swiper-item v-for="(item, index) in list">
+				<!-- <scroll-view scroll-y style="height: 100%;width: 100%;"> -->
+				<List v-if="index === 0" :sourceList="customerList" @editCustomer="editCustomer" />
+				<Timeout v-if="index === 1" :sourceList="customerList" @editCustomer="editCustomer" />
+				<Important v-if="index === 2" :sourceList="customerList" @editCustomer="editCustomer" />
+				<uni-fab v-show="index === 0" class="add-customer" @fabClick="addCustomer"></uni-fab>
+				<!-- </scroll-view> -->
 			</swiper-item>
 		</swiper>
-		<u-popup mode="bottom" v-model="showRecycle" border-radius="16" closeable close-icon="icon iconfont icon-a-20-guanbiqingkong" height="85%">
-			<recycle  />
-		</u-popup>
-		
+		<u-popup mode="bottom" v-model="showRecycle" border-radius="16" closeable close-icon="icon iconfont icon-a-20-guanbiqingkong" height="85%"><recycle /></u-popup>
 	</view>
 </template>
 
 <script>
-import CustomerList from './components/CustomerList.vue';
+import List from './components/customer/List.vue';
+import Important from './components/customer/Important.vue';
+import Timeout from './components/customer/Timeout.vue';
+import { getCustomerList } from '../../api/customer.js';
+
 import recycle from './components/recycle.vue';
+
 export default {
-	components: { CustomerList,recycle },
+	components: { List, Important, Timeout, recycle },
 	created() {
 		uni.getLocation({
 			type: 'gcj02',
@@ -51,6 +58,9 @@ export default {
 				console.log(res);
 				this.local = res;
 			}
+		});
+		getCustomerList().then(res => {
+			this.customerList = res.data ? res.data : [];
 		});
 	},
 	data() {
@@ -67,8 +77,9 @@ export default {
 			},
 			list: [{ name: '首页' }, { name: '超时' }, { name: '关注' }],
 			addressName: '请选择定位',
-			local: '当前定位' ,//当前定位
-			showRecycle:false,
+			local: '当前定位', //当前定位
+			showRecycle: false,
+			customerList: []
 		};
 	},
 	methods: {
@@ -94,17 +105,16 @@ export default {
 			// 	url:'./Address'
 			// })
 		},
-		addCustomer(){
+		addCustomer() {
 			uni.navigateTo({
-				url:'components/addCustomer'
-			})
+				url: 'components/addCustomer'
+			});
 		},
-		editCustomer(data){
-			console.log('ssssss');
+		editCustomer(data) {
+			console.log('ssssss', data);
 			uni.navigateTo({
-				url:'components/editCustomer',
-				
-			})
+				url: `components/editCustomer?id=${data.auther_id}`
+			});
 		}
 	}
 };

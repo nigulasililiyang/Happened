@@ -18,7 +18,6 @@
 			</u-cell-group>
 		</view>
 		<view class="remark">观看教程以便于使用</view>
-
 		<view class="u-m-t-20">
 			<u-cell-group>
 				<u-cell-item title="隐私政策" index="3" @click="click"></u-cell-item>
@@ -39,52 +38,54 @@
 				</u-cell-item>
 			</u-cell-group>
 		</view>
-		<u-select mode='single-column' v-model="show" :default-value="timeout" :list="list" @confirm="confirm"></u-select>
+		<u-select mode="single-column" v-model="show" :default-value="timeout" :list="list" @confirm="confirm"></u-select>
 	</view>
 </template>
 
 <script>
+import { getCustomerInfo } from '../../api/customer.js';
+import { getUser, removeUser } from '../../utils/auth.js';
 export default {
 	data() {
 		return {
 			show: false,
 			timeout: [],
 			list: [
-					{
-						value: 0,
-						label: '1个月'
-					},
-					{
-						value: 1,
-						label: '2个月'
-					},
-					{
-						value: 2,
-						label: '3个月'
-					},
-					{
-						value: 3,
-						label: '半年'
-					}
-				],
+				{
+					value: 0,
+					label: '1个月'
+				},
+				{
+					value: 1,
+					label: '2个月'
+				},
+				{
+					value: 2,
+					label: '3个月'
+				},
+				{
+					value: 3,
+					label: '半年'
+				}
+			]
 		};
 	},
 	computed: {
 		timeoutLabel() {
-			return this.timeout[0]!=undefined?this.list[this.timeout[0]].label:'';
+			return this.timeout[0] != undefined ? this.list[this.timeout[0]].label : '';
 		}
 	},
-	mounted() {
+	onLoad() {
+		const user = getUser();
+		getCustomerInfo(user.id).then(res => {});
 		this.getTimeout();
 	},
 	methods: {
 		getTimeout() {
 			const timeout = uni.getStorageSync('Timeout');
-			console.log(timeout)
-			this.timeout = timeout!==''?[timeout]:[];
+			this.timeout = timeout !== '' ? [timeout] : [];
 		},
 		confirm(e) {
-			console.log(e);
 			uni.setStorageSync('Timeout', e[0].value);
 			this.show = false;
 			this.getTimeout();
@@ -114,11 +115,22 @@ export default {
 						url: 'components/suggestions'
 					});
 					break;
-					case '6':
-						uni.navigateTo({
-							url:'../login/index'
-						})
-						break;
+				case '6':
+					uni.showModal({
+						title: '提示',
+						content: '确认退出登录',
+						success: res => {
+							if (res.confirm) {
+								removeUser();
+								uni.navigateTo({
+									url: '../login/index'
+								});
+							} else if (res.cancel) {
+								console.log('用户点击取消');
+							}
+						}
+					});
+					break;
 				default:
 					break;
 			}

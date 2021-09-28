@@ -2,20 +2,11 @@
 	<view>
 		<uni-nav-bar left-icon="back" left-text="取消" right-text="保存" title="新建联系人" fixed statusBar @clickLeft="onLeft" @clickRight="onRight"></uni-nav-bar>
 		<scroll-view style="height: calc(100vh - 44px);" scroll-y>
-			<u-cell-group>
-				<u-cell-item :arrow="false" :value-style="noRight">
-					<input slot="title" placeholder="姓名" />
-					<view slot="icon" class="left-icon">姓名</view>
-				</u-cell-item>
-				<u-cell-item :arrow="false" :value-style="noRight">
-					<input slot="title" placeholder="常用电话" type="number" />
-					<view slot="icon" class="left-icon">电话</view>
-				</u-cell-item>
-				<u-cell-item :arrow="false" :value-style="noRight">
-					<input slot="title" placeholder="所在公司" />
-					<view slot="icon" class="left-icon">公司</view>
-				</u-cell-item>
-			</u-cell-group>
+			<u-form style="background-color: #FFFFFF;">
+				<u-field placeholder="姓名"><view slot="icon" class="left-icon">姓名</view></u-field>
+				<u-field placeholder="常用电话" type="number"><view slot="icon" class="left-icon">电话</view></u-field>
+				<u-field placeholder="所在公司"><view slot="icon" class="left-icon">公司</view></u-field>
+			</u-form>
 
 			<view class="form-title">
 				<u-icon name="icon iconfont icon-a-16-gongsi" style="padding-right: 8px;"></u-icon>

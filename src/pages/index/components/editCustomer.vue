@@ -6,15 +6,15 @@
 		<scroll-view style="height: calc(100vh - 44px);" scroll-y>
 			<u-cell-group>
 				<u-cell-item :arrow="false" :value-style="noRight">
-					<input slot="title" placeholder="姓名" />
+					<input slot="title" placeholder="姓名" v-model="customer.name" />
 					<view slot="icon" class="left-icon">姓名</view>
 				</u-cell-item>
 				<u-cell-item :arrow="false" :value-style="noRight">
-					<input slot="title" placeholder="常用电话" type="number" />
+					<input slot="title" placeholder="常用电话" type="number" v-model="customer.phone" />
 					<view slot="icon" class="left-icon">电话</view>
 				</u-cell-item>
 				<u-cell-item :arrow="false" :value-style="noRight">
-					<input slot="title" placeholder="所在公司" />
+					<input slot="title" placeholder="所在公司" v-model="customer.companyname" />
 					<view slot="icon" class="left-icon">公司</view>
 				</u-cell-item>
 			</u-cell-group>
@@ -25,12 +25,12 @@
 			</view>
 
 			<u-cell-group>
-				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseWork">
-					<input slot="title" placeholder="单位地址" style="width: calc(100vw - 48px);" disabled />
+				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress">
+					<input slot="title" placeholder="单位地址" style="width: calc(100vw - 48px);" disabled v-model="customer.company_address.long_lat_address_jd" />
 					<u-icon slot="right-icon" name="icon iconfont icon-a-20-dingwei" size="32"></u-icon>
 				</u-cell-item>
-				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseWork">
-					<input slot="title" placeholder="详细地址" style="width: calc(100vw - 48px);" />
+				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress">
+					<input slot="title" placeholder="详细地址" style="width: calc(100vw - 48px);" v-model="customer.company_address.long_lat_address" />
 				</u-cell-item>
 			</u-cell-group>
 
@@ -40,12 +40,12 @@
 			</view>
 
 			<u-cell-group>
-				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseHome">
-					<input slot="title" placeholder="家庭地址" style="width: calc(100vw - 48px);" disabled />
+				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress">
+					<input slot="title" placeholder="家庭地址" style="width: calc(100vw - 48px);" disabled v-model="customer.home_address.long_lat_address_jd" />
 					<u-icon slot="right-icon" name="icon iconfont icon-a-20-dingwei" size="32"></u-icon>
 				</u-cell-item>
-				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseWork">
-					<input slot="title" placeholder="详细地址" style="width: calc(100vw - 48px);" />
+				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress">
+					<input slot="title" placeholder="详细地址" style="width: calc(100vw - 48px);" v-model="customer.home_address.long_lat_address" />
 				</u-cell-item>
 			</u-cell-group>
 
@@ -59,12 +59,23 @@
 					</view>
 				</u-cell-item>
 			</u-cell-group>
-
+			<view v-for="address in customer.address_list">
+				<u-gap></u-gap>
+				<u-cell-group>
+					<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress">
+						<input slot="title" placeholder="地址" style="width: calc(100vw - 48px);" disabled v-model="address.long_lat_address_jd" />
+						<u-icon slot="right-icon" name="icon iconfont icon-a-20-dingwei" size="32"></u-icon>
+					</u-cell-item>
+					<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress">
+						<input slot="title" placeholder="详细地址" style="width: calc(100vw - 48px);" v-model="address.long_lat_address" />
+					</u-cell-item>
+				</u-cell-group>
+			</view>
 			<u-gap></u-gap>
 
 			<u-cell-group>
 				<u-cell-item :arrow="false" title-width="100%" :value-style="noRight">
-					<view slot="title" style="width: 100%;"><input placeholder="描述" /></view>
+					<view slot="title" style="width: 100%;"><input placeholder="描述" v-model="customer.remark" /></view>
 					<view slot="icon" class="left-icon">备注</view>
 				</u-cell-item>
 			</u-cell-group>
@@ -79,12 +90,11 @@
 				<u-read-more show-height="200" toggle close-text="展开全部记录" text-indent="0">
 					<view style="padding:16px;">
 						<u-time-line>
-							<u-time-line-item style="border-bottom: solid 1rpx #EEEEEE;" @click="editRecord(record)" v-for="record in recordList">
+							<u-time-line-item style="border-bottom: solid 1rpx #EEEEEE;" @click="editRecord(record)" v-for="record in contactHistoryList">
 								<template v-slot:content>
 									<view>
-										<view class="u-order-title">{{ record.title }}</view>
-										<!-- <view class="u-order-desc">[自提柜]您的快件已放在楼下侧门，直走前方53.6米，左拐约10步，再右拐直走，见一红灯笼停下，叩门三下，喊“芝麻开门”即可。</view> -->
-										<view class="u-order-time">{{ record.createTime }}</view>
+										<view class="u-order-title">{{ record.remark }}</view>
+										<view class="u-order-time">{{ record.add_time }}</view>
 									</view>
 								</template>
 							</u-time-line-item>
@@ -99,65 +109,111 @@
 						<u-icon name="icon iconfont icon-a-20-guanzhu" size="48" style="padding-right: 8px;"></u-icon>
 						设为关注
 					</view>
-					<u-switch slot="right-icon" v-model="contact.attention" active-color="#0055FF " inactive-color="#D9DADE"></u-switch>
+					<u-switch slot="right-icon" active-color="#0055FF " inactive-color="#D9DADE" v-model="is_important"></u-switch>
 				</u-cell-item>
 				<u-cell-item :arrow="false">
 					<view slot="icon" class="left-icon">
 						<u-icon name="icon iconfont icon-a-20-chaoshiyincang" size="48" style="padding-right: 8px;"></u-icon>
 						超时隐藏
 					</view>
-					<u-switch slot="right-icon" v-model="contact.attention" active-color="#0055FF " inactive-color="#D9DADE"></u-switch>
+					<u-switch slot="right-icon" active-color="#0055FF " inactive-color="#D9DADE" v-model="is_time_out"></u-switch>
 				</u-cell-item>
 			</u-cell-group>
 			<u-gap></u-gap>
 			<u-cell-group>
-				<u-cell-item :user-label-slot="false" :arrow="false" index="6" @click="click">
+				<u-cell-item :user-label-slot="false" :arrow="false" index="6" @click="deleteCustomer">
 					<view slot="label" style="font-size: 16px;text-align: center;width: calc(100vw - 32px);color:#E63A2E;">删除联系人</view>
 				</u-cell-item>
 			</u-cell-group>
 			<u-gap height="200"></u-gap>
 		</scroll-view>
-		<u-popup mode="bottom" v-model="showAddRecord" border-radius="32" height="85%"><addRecord @cancel="showAddRecord = false" /></u-popup>
+		<u-popup mode="bottom" v-model="showAddRecord" border-radius="32" height="85%">
+			<addRecord @cancel="showAddRecord = false" :customerId="customerId" @addSuccess="addRecordSuccess" />
+		</u-popup>
 	</view>
 </template>
 
 <script>
+import { getContactHistory } from '../../../api/contact.js';
+import { getCustomerInfo, changeCustomerSet } from '../../../api/customer.js';
 import addRecord from './addRecord.vue';
 export default {
 	components: { addRecord },
 	data() {
 		return {
-			title: '张兰的信息',
-			contact: {
-				addressForm: {}
-			},
+			customerId: null,
+			title: '',
 			noRight: {
 				width: '0px'
 			},
 			showAddRecord: false, //显示添加记录页面
-			recordList: [
-				{ id: 1, title: '今日已电话联系', createTime: new Date() },
-				{ id: 2, title: '带了3箱苹果过去，相谈甚欢，项目沟通进展', createTime: new Date() },
-				{ id: 3, title: '建立关系', createTime: new Date() }
-			]
+			customer: { company_address: {}, home_address: {} },
+			contactHistoryList: [],
+			is_important: false, //是否重要客户，1是，0否
+			is_time_out: false //是否超时，1是，0否
 		};
 	},
+	onLoad(option) {
+		this.customerId = option.id;
+		this.getCustomer();
+		this.getContacts();
+	},
 	methods: {
+		chooseAddress() {},
+		getCustomer() {
+			getCustomerInfo(this.customerId).then(res => {
+				this.title = `${res.data.name}的信息`;
+				this.customer = res.data;
+				this.is_important = res.data.is_important == 1 ? true : false;
+				this.is_time_out = res.data.is_time_out == 1 ? true : false;
+				console.log(res.data);
+			});
+		},
+		getContacts() {
+			const param = { customerId: this.customerId, is_deleted: 0, limit: 100 };
+			getContactHistory(param).then(res => {
+				this.contactHistoryList = res.data.contactHistoryList;
+			});
+		},
+		//取消
 		onLeft() {
 			uni.navigateBack({
 				delta: 1
 			});
 		},
+		//保存
 		onRight() {
-			uni.navigateBack({
-				delta: 1
+			var param = this.$u.deepClone(this.customer);
+			param.customerId = this.customerId;
+			param.is_important = this.is_important == true ? 1 : 0;
+			param.is_time_out = this.is_time_out == true ? 1 : 0;
+			changeCustomerSet(param).then(res => {
+				uni.showToast({
+					title: '修改成功'
+				});
+				uni.navigateBack({
+					delta: 1
+				});
 			});
 		},
 		// 添加记录
 		addRecord() {
 			this.showAddRecord = true;
 		},
-		editRecord() {}
+		addRecordSuccess() {
+			this.showAddRecord = false;
+			this.getContacts();
+		},
+		editRecord() {},
+		/**
+		 * @description 删除联系人
+		 */
+		deleteCustomer() {
+			uni.showModal({
+				title: '提示',
+				content: '确定删除联系人'
+			});
+		}
 	}
 };
 </script>

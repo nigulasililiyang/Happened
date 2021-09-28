@@ -1,18 +1,18 @@
 <template>
 	<view style="padding:0 48px;background-color: #FFFFFF;height: 100%;">
 		<view style="display: flex;padding: 92px 0 48px 0;">
-			<image src="../../static/logo.png" style="width: 64px;height: 64px;padding-right: 12px;" />
+			<image src="../../static/images/login-logo.png" style="width: 64px;height: 64px;padding-right: 12px;" />
 			<view style="width: calc(100% - 64px);">
 				<view style="font-size: 24px;font-weight: 500;line-height: 33px;">手机号登录</view>
 				<view style="color: #999999;">巧巧终于等到您</view>
 			</view>
 		</view>
-		<u-form :border-bottom="false">
-			<u-form-item style="height: auto;padding: 0;border: none;">
-				<u-field placeholder="请先输入手机号" label-width="0" style="height:56px;" :clearable="false"></u-field>
+		<u-form :border-bottom="false" :model="form" ref="login">
+			<u-form-item style="height: auto;padding: 0;border: none;" prop="username">
+				<u-field v-model="form.username" placeholder="请先输入手机号" label-width="0" style="height:56px;" :clearable="false"></u-field>
 			</u-form-item>
-			<u-form-item style="height: auto;padding: 0;border: none;">
-				<u-field placeholder="6位验证码" label-width="0" style="height:56px;" :clearable="false">
+			<u-form-item style="height: auto;padding: 0;border: none;" prop="code">
+				<u-field v-model="form.code" placeholder="6位验证码" label-width="0" style="height:56px;" :clearable="false">
 					<view slot="right">
 						<u-verification-code
 							:keep-running="true"
@@ -25,7 +25,7 @@
 							:changeText="changeText"
 							:endText="endText"
 						></u-verification-code>
-						<u-button @tap="getCode">{{ tips }}</u-button>
+						<view @tap="getCode" :disabled="!form.username" :style="{ color: form.username ? '#0055FF' : '#CCCCCC' }">{{ tips }}</view>
 					</view>
 				</u-field>
 			</u-form-item>
@@ -34,9 +34,8 @@
 			<text style="color: #999999;" v-if="!voiceCode" @click="getVoiceCode">收不到验证码？</text>
 			<text style="color: #F2A100;" v-if="voiceCode">即将提供语音验证码，请注意接听～</text>
 		</view>
-		<uni-row style="margin-top: 40px;"><button type="primary" @click="">登录</button></uni-row>
-		<view style="height: calc(100% - 476px);"></view>
-		<view style="text-align: center;"><u-checkbox v-model="approve" :label-disabled="false" @change="onAgree">阅读并同意《隐私政策》</u-checkbox></view>
+		<uni-row style="margin-top: 40px;"><button type="primary" @click="onLogin">登录</button></uni-row>
+		<view style="text-align: center;padding: 16px;"><u-checkbox v-model="approve" :label-disabled="false" @change="onAgree">阅读并同意《隐私政策》</u-checkbox></view>
 		<uni-popup ref="popup" :mask-click="false">
 			<view
 				style="display: flex;
@@ -84,7 +83,13 @@
 </template>
 
 <script>
+import { getVerifycode,getRegSmsCode,loginWithAutoReg } from '../../api/login.js';
+import {setUser}from "../../utils/auth.js"
 export default {
+	// 必须要在onReady生命周期，因为onLoad生命周期组件可能尚未创建完毕
+	onReady() {
+		this.$refs.login.setRules(this.rules);
+	},
 	data() {
 		return {
 			approve: false,
@@ -94,7 +99,33 @@ export default {
 			seconds: 60,
 			startText: '获取验证码',
 			changeText: 'X秒重新获取',
-			endText: '重新获取'
+			endText: '重新获取',
+			form: {
+				username:'13957192040',
+				code:'2468'
+			},
+			rules: {
+				username: [
+					{
+						required: true,
+						message: '请输入姓名',
+						// 可以单个或者同时写两个触发验证方式
+						trigger: ['change', 'blur']
+					}
+				],
+				code: [
+					{
+						required: true,
+						message: '请输入验证码',
+						trigger: ['change', 'blur']
+					},
+					{
+						min: 4,
+						message: '验证码长度错误',
+						trigger: ['change', 'blur']
+					}
+				]
+			}
 		};
 	},
 	methods: {
@@ -104,17 +135,17 @@ export default {
 		},
 		getCode() {
 			if (this.$refs.uCode.canGetCode) {
-				// 模拟向后端请求验证码
+				const param={mobile:this.form.username,type:'login',tokeen:'2468'};
 				uni.showLoading({
 					title: '正在获取验证码'
 				});
-				setTimeout(() => {
+				getRegSmsCode(param).then(() => {
 					uni.hideLoading();
 					// 这里此提示会被this.start()方法中的提示覆盖
 					this.$u.toast('验证码已发送');
 					// 通知验证码组件内部开始倒计时
 					this.$refs.uCode.start();
-				}, 2000);
+				});
 			} else {
 				this.$u.toast('倒计时结束后再发送');
 			}
@@ -152,6 +183,26 @@ export default {
 		disAgree() {
 			this.approve = false;
 			this.close();
+		},
+		onLogin() {
+			this.$refs.login.validate((valid) => {
+				if(valid){
+					if(!this.approve){
+						uni.showModal({
+							content:'请先勾选隐私'
+						});
+					}else{
+						loginWithAutoReg(this.form).then((res)=>{
+							console.log('登录成功');
+							console.log(res);
+							setUser(res.data);
+							uni.reLaunch({
+								url:'../index/index'
+							})
+						});
+					}
+				}
+			});
 		}
 	}
 };
