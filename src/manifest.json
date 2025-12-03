@@ -1,66 +1,166 @@
 {
-	"name": "",
-	"appid": "",
-	"description": "",
-	"versionName": "1.0.0",
-	"versionCode": "100",
-	"transformPx": false,
-	"app-plus": { /* 5+App特有相关 */
-		"usingComponents": true,
-		"splashscreen": {
-			"alwaysShowBeforeRender": true,
-			"waiting": true,
-			"autoclose": true,
-			"delay": 0
-		},
-		"modules": { /* 模块配置 */
-
-		},
-		"distribute": { /* 应用发布信息 */
-			"android": { /* android打包配置 */
-				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
-					"<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
-					"<uses-permission android:name=\"android.permission.VIBRATE\"/>",
-					"<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
-					"<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
-					"<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
-					"<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
-					"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.CAMERA\"/>",
-					"<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
-					"<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
-					"<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
-					"<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
-					"<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
-					"<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
-					"<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
-					"<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
-					"<uses-feature android:name=\"android.hardware.camera\"/>",
-					"<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
-					"<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
-				]
-			},
-			"ios": { /* ios打包配置 */
-
-			},
-			"sdkConfigs": { /* SDK配置 */
-
-			}
-		}
-	},
-	"quickapp": { /* 快应用特有相关 */
-
-	},
-	"mp-weixin": { /* 微信小程序特有相关 */
-		"appid": "",
-		"setting": {
-			"urlCheck": false
-		},
-		"usingComponents": true
-	},
-	"mp-alipay" : {
+    "name" : "qqapp",
+    "appid" : "__UNI__C912FC1",
+    "description" : "一个神奇的app",
+    "versionName" : "1.0.0",
+    "versionCode" : 1,
+    "transformPx" : false,
+    "app-plus" : {
+        "compatible" : {
+            "ignoreVersion" : true
+        },
+        /* 5+App特有相关 */
+        "usingComponents" : true,
+        "splashscreen" : {
+            "alwaysShowBeforeRender" : true,
+            "waiting" : true,
+            "autoclose" : true,
+            "delay" : 5,
+            "ads" : {
+                "background" : "#FF0000",
+                "image" : "static/logo.png"
+            }
+        },
+        "modules" : {
+            "Contacts" : {
+                "description" : "加速度传感器"
+            },
+            "Geolocation" : {},
+            "Maps" : {}
+        },
+        /* 模块配置 */
+        "distribute" : {
+            /* 应用发布信息 */
+            "android" : {
+                /* android打包配置 */
+                "permissions" : [
+                    "<uses-feature android:name=\"android.hardware.camera\"/>",
+                    "<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+                    "<uses-permission android:name=\"android.permission.CAMERA\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+                    "<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+                    "<uses-permission android:name=\"android.permission.INTERNET\"/>",
+                    "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+                    "<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+                    "<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+                    "<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+                    "<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+                    "<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+                    "<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"
+                ]
+            },
+            "ios" : {
+                "privacyDescription" : {
+                    "NSContactsUsageDescription" : "授权通讯录，快速找到您重视的联系人",
+                    "NSLocationAlwaysAndWhenInUseUsageDescription" : "打开定位能够快速找到附近您认为重视的联系",
+                    "NSLocationWhenInUseUsageDescription" : "打开定位能够快速找到附近您认为重视的联系",
+                    "NSUserTrackingUsageDescription" : "获取标记权限向您提供更优质、安全的个性化"
+                }
+            },
+            /* ios打包配置 */
+            "sdkConfigs" : {
+                "push" : {
+                    "unipush" : {}
+                },
+                "geolocation" : {
+                    "amap" : {
+                        "__platform__" : [ "ios" ],
+                        "appkey_ios" : "e56e2bf3082272dbcf29f1362b0b865a",
+                        "appkey_android" : ""
+                    }
+                },
+                "maps" : {
+                    "amap" : {
+                        "appkey_ios" : "e56e2bf3082272dbcf29f1362b0b865a",
+                        "appkey_android" : "38fb5b6190fa3a264667954719e2d8e9"
+                    }
+                },
+                "ad" : {
+                    "360" : {},
+                    "csj" : {},
+                    "gdt" : {},
+                    "ks" : {},
+                    "ks-content" : {},
+                    "BXM-AD" : {}
+                }
+            },
+            "splashscreen" : {
+                "iosStyle" : "common",
+                "ios" : {
+                    "storyboard" : ""
+                },
+                "androidStyle" : "default",
+                "android" : {
+                    "hdpi" : "src/static/images/android/mipmap-hdpi/kaiping-414896.png",
+                    "xhdpi" : "src/static/images/android/mipmap-xhdpi/kaiping-414896.png",
+                    "xxhdpi" : "src/static/images/android/mipmap-xxxhdpi/kaiping-414896.png"
+                },
+                "useOriginalMsgbox" : true
+            },
+            "icons" : {
+                "android" : {
+                    "hdpi" : "unpackage/res/icons/72x72.png",
+                    "xhdpi" : "unpackage/res/icons/96x96.png",
+                    "xxhdpi" : "unpackage/res/icons/144x144.png",
+                    "xxxhdpi" : "unpackage/res/icons/192x192.png"
+                },
+                "ios" : {
+                    "appstore" : "unpackage/res/icons/1024x1024.png",
+                    "ipad" : {
+                        "app" : "unpackage/res/icons/76x76.png",
+                        "app@2x" : "unpackage/res/icons/152x152.png",
+                        "notification" : "unpackage/res/icons/20x20.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png",
+                        "proapp@2x" : "unpackage/res/icons/167x167.png",
+                        "settings" : "unpackage/res/icons/29x29.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "spotlight" : "unpackage/res/icons/40x40.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png"
+                    },
+                    "iphone" : {
+                        "app@2x" : "unpackage/res/icons/120x120.png",
+                        "app@3x" : "unpackage/res/icons/180x180.png",
+                        "notification@2x" : "unpackage/res/icons/40x40.png",
+                        "notification@3x" : "unpackage/res/icons/60x60.png",
+                        "settings@2x" : "unpackage/res/icons/58x58.png",
+                        "settings@3x" : "unpackage/res/icons/87x87.png",
+                        "spotlight@2x" : "unpackage/res/icons/80x80.png",
+                        "spotlight@3x" : "unpackage/res/icons/120x120.png"
+                    }
+                }
+            }
+        },
+        // ...
+        "permissions" : {
+            // ...
+            "Contacts" : {
+                "description" : "授权通讯录，快速找到您重视的联系人"
+            }
+        }
+    },
+    /* SDK配置 */
+    "quickapp" : {},
+    /* 快应用特有相关 */
+    "mp-weixin" : {
+        /* 微信小程序特有相关 */
+        "appid" : "",
+        "setting" : {
+            "urlCheck" : false
+        },
+        "usingComponents" : true
+    },
+    "mp-alipay" : {
         "usingComponents" : true
     },
     "mp-baidu" : {

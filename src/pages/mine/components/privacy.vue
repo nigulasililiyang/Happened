@@ -1,0 +1,55 @@
+<template>
+	<view class="privacy">
+		<view style="padding-bottom: 8px;">回用下车种维号率传管书据认团北里得场力方音矿领直传团制日值全己起水江则五长使安立年应被史记建样志切半织计例及合委作白备况完标观多这与。
+		</view>
+		<view style="padding-bottom: 8px;">身习什会米研按须亲速天马指体而化口把构派型约取儿面西个些具京一上等因管受常整状斗近听受人因好。
+		</view>
+		<view style="padding-bottom: 8px;">或验备与公命真众得书力科出日还养规及场没路外转采维装满已者值养上全多周备决农。
+		</view>
+		<view style="padding-bottom: 8px;">色基知必头开形很节表或它力为合术上给器往料不说入总方强真海实己区解切这连应些平土术织力价把同合消加报。
+		</view>
+		<view style="padding-bottom: 8px;">更成所入样场林科多南证你总想却矿角先可示开公八见联从并便史全生回感件红了原新非斗七安林过比包难性问完期现群步同被。
+		</view>
+		<view style="padding-bottom: 8px;">确满并定色较外处青自白很场明增那造支车层律连题志内门海体导战周展利一重县给二质件家切信她团联切物叫有置八满细积活心国后土圆何。
+		</view>
+		<view style="padding-bottom: 8px;">面速数积西多度用始始造半适加得太按全会影派美八证期民主提是事引采安风点采及外道斗好处向属速四有最传给流位我或育些政义发合进花观看马多家系参报张。
+		</view>
+		<view style="padding-bottom: 8px;">层越口进指证断规意高信切动要路术革又才维市子社但现数度府全里道政九段流制论技自究委千后感育社选。
+		</view>
+		<view style="padding-bottom: 8px;">回用下车种维号率传管书据认团北里得场力方音矿领直传团制日值全己起水江则五长使安立年应被史记建样志切半织计例及合委作白备况完标观多这与。
+		</view>
+		<view style="padding-bottom: 8px;">身习什会米研按须亲速天马指体而化口把构派型约取儿面西个些具京一上等因管受常整状斗近听受人因好。
+		</view>
+		<view style="padding-bottom: 8px;">或验备与公命真众得书力科出日还养规及场没路外转采维装满已者值养上全多周备决农。
+		</view>
+		<view style="padding-bottom: 8px;">色基知必头开形很节表或它力为合术上给器往料不说入总方强真海实己区解切这连应些平土术织力价把同合消加报。
+		</view>
+		<view style="padding-bottom: 8px;">更成所入样场林科多南证你总想却矿角先可示开公八见联从并便史全生回感件红了原新非斗七安林过比包难性问完期现群步同被。
+		</view>
+		<view style="padding-bottom: 8px;">确满并定色较外处青自白很场明增那造支车层律连题志内门海体导战周展利一重县给二质件家切信她团联切物叫有置八满细积活心国后土圆何。
+		</view>
+		<view style="padding-bottom: 8px;">面速数积西多度用始始造半适加得太按全会影派美八证期民主提是事引采安风点采及外道斗好处向属速四有最传给流位我或育些政义发合进花观看马多家系参报张。
+		</view>
+		<view style="padding-bottom: 8px;">层越口进指证断规意高信切动要路术革又才维市子社但现数度府全里道政九段流制论技自究委千后感育社选。
+		</view>
+	</view>
+</template>
+
+<script>
+export default {
+	data() {
+		return {};
+	},
+	methods: {}
+};
+</script>
+
+<style>
+	.privacy{
+		font-size: 16px;
+		padding: 16px;
+		background: #ffffff;
+		color: #333333;
+		line-height: 24px;
+	}
+</style>

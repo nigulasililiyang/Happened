@@ -39,7 +39,8 @@
     "test:h5": "cross-env UNI_PLATFORM=h5 jest -i",
     "test:ios": "cross-env UNI_PLATFORM=app-plus UNI_OS_NAME=ios jest -i",
     "test:mp-baidu": "cross-env UNI_PLATFORM=mp-baidu jest -i",
-    "test:mp-weixin": "cross-env UNI_PLATFORM=mp-weixin jest -i"
+    "test:mp-weixin": "cross-env UNI_PLATFORM=mp-weixin jest -i",
+    "deploy:h5": "npm run build:h5 && gh-pages -d dist/build/h5"
   },
   "dependencies": {
     "@dcloudio/uni-app-plus": "^2.0.0-32220210818002",
@@ -57,10 +58,12 @@
     "@dcloudio/uni-quickapp-native": "^2.0.0-32220210818002",
     "@dcloudio/uni-quickapp-webview": "^2.0.0-32220210818002",
     "@dcloudio/uni-stat": "^2.0.0-32220210818002",
+    "@dcloudio/uni-ui": "^1.4.4",
     "@vue/shared": "^3.0.0",
     "core-js": "^3.6.5",
     "flyio": "^0.6.2",
     "regenerator-runtime": "^0.12.1",
+    "uview-ui": "^1.8.4",
     "vue": "^2.6.11",
     "vuex": "^3.2.0"
   },
@@ -80,10 +83,13 @@
     "@vue/cli-service": "~4.5.0",
     "babel-plugin-import": "^1.11.0",
     "cross-env": "^7.0.2",
+    "gh-pages": "^6.3.0",
     "jest": "^25.4.0",
     "mini-types": "*",
     "miniprogram-api-typings": "*",
     "postcss-comment": "^2.0.0",
+    "sass": "^1.39.2",
+    "sass-loader": "^10.1.1",
     "vue-template-compiler": "^2.6.11"
   },
   "browserslist": [

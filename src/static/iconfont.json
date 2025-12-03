@@ -1,0 +1,198 @@
+{
+  "id": "2793736",
+  "name": "画客巧巧APP",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "24146544",
+      "name": "36-添加反馈凭证",
+      "font_class": "a-36-tianjiafankuipingzheng",
+      "unicode": "e7f3",
+      "unicode_decimal": 59379
+    },
+    {
+      "icon_id": "24146543",
+      "name": "36-首页-选中",
+      "font_class": "a-36-shouye-xuanzhong",
+      "unicode": "e7f2",
+      "unicode_decimal": 59378
+    },
+    {
+      "icon_id": "24146541",
+      "name": "24-详情",
+      "font_class": "a-24-xiangqing",
+      "unicode": "e7f0",
+      "unicode_decimal": 59376
+    },
+    {
+      "icon_id": "24146542",
+      "name": "24-添加",
+      "font_class": "a-24-tianjia",
+      "unicode": "e7f1",
+      "unicode_decimal": 59377
+    },
+    {
+      "icon_id": "24146536",
+      "name": "24-我的-默认",
+      "font_class": "a-24-wode-moren",
+      "unicode": "e7eb",
+      "unicode_decimal": 59371
+    },
+    {
+      "icon_id": "24146537",
+      "name": "24-通讯录-选中",
+      "font_class": "a-24-tongxunlu-xuanzhong",
+      "unicode": "e7ec",
+      "unicode_decimal": 59372
+    },
+    {
+      "icon_id": "24146538",
+      "name": "24-通讯录-默认",
+      "font_class": "a-24-tongxunlu-moren",
+      "unicode": "e7ed",
+      "unicode_decimal": 59373
+    },
+    {
+      "icon_id": "24146539",
+      "name": "24-我的-选中",
+      "font_class": "a-24-wode-xuanzhong",
+      "unicode": "e7ee",
+      "unicode_decimal": 59374
+    },
+    {
+      "icon_id": "24146540",
+      "name": "24-首页-默认",
+      "font_class": "a-24-shouye-moren",
+      "unicode": "e7ef",
+      "unicode_decimal": 59375
+    },
+    {
+      "icon_id": "24146535",
+      "name": "20-关闭、清空",
+      "font_class": "a-20-guanbiqingkong",
+      "unicode": "e7ea",
+      "unicode_decimal": 59370
+    },
+    {
+      "icon_id": "24146525",
+      "name": "20-更多",
+      "font_class": "a-20-gengduo",
+      "unicode": "e7e0",
+      "unicode_decimal": 59360
+    },
+    {
+      "icon_id": "24146526",
+      "name": "20-关注",
+      "font_class": "a-20-guanzhu",
+      "unicode": "e7e1",
+      "unicode_decimal": 59361
+    },
+    {
+      "icon_id": "24146527",
+      "name": "20-搜索",
+      "font_class": "a-20-sousuo",
+      "unicode": "e7e2",
+      "unicode_decimal": 59362
+    },
+    {
+      "icon_id": "24146528",
+      "name": "20-返回",
+      "font_class": "a-20-fanhui",
+      "unicode": "e7e3",
+      "unicode_decimal": 59363
+    },
+    {
+      "icon_id": "24146529",
+      "name": "20-播放",
+      "font_class": "a-20-bofang",
+      "unicode": "e7e4",
+      "unicode_decimal": 59364
+    },
+    {
+      "icon_id": "24146530",
+      "name": "20-回收站",
+      "font_class": "a-20-huishouzhan",
+      "unicode": "e7e5",
+      "unicode_decimal": 59365
+    },
+    {
+      "icon_id": "24146531",
+      "name": "20-超时隐藏",
+      "font_class": "a-20-chaoshiyincang",
+      "unicode": "e7e6",
+      "unicode_decimal": 59366
+    },
+    {
+      "icon_id": "24146532",
+      "name": "20-记录",
+      "font_class": "a-20-jilu",
+      "unicode": "e7e7",
+      "unicode_decimal": 59367
+    },
+    {
+      "icon_id": "24146533",
+      "name": "20-电话",
+      "font_class": "a-20-dianhua",
+      "unicode": "e7e8",
+      "unicode_decimal": 59368
+    },
+    {
+      "icon_id": "24146534",
+      "name": "20-定位",
+      "font_class": "a-20-dingwei",
+      "unicode": "e7e9",
+      "unicode_decimal": 59369
+    },
+    {
+      "icon_id": "24146518",
+      "name": "16-复选-默认",
+      "font_class": "a-16-fuxuan-moren",
+      "unicode": "e7d9",
+      "unicode_decimal": 59353
+    },
+    {
+      "icon_id": "24146519",
+      "name": "16-箭头-上",
+      "font_class": "a-16-jiantou-shang",
+      "unicode": "e7da",
+      "unicode_decimal": 59354
+    },
+    {
+      "icon_id": "24146520",
+      "name": "16-箭头-右",
+      "font_class": "a-16-jiantou-you",
+      "unicode": "e7db",
+      "unicode_decimal": 59355
+    },
+    {
+      "icon_id": "24146521",
+      "name": "16-住址",
+      "font_class": "a-16-zhuzhi",
+      "unicode": "e7dc",
+      "unicode_decimal": 59356
+    },
+    {
+      "icon_id": "24146522",
+      "name": "16-箭头-下",
+      "font_class": "a-16-jiantou-xia",
+      "unicode": "e7dd",
+      "unicode_decimal": 59357
+    },
+    {
+      "icon_id": "24146523",
+      "name": "16-复选-选中",
+      "font_class": "a-16-fuxuan-xuanzhong",
+      "unicode": "e7de",
+      "unicode_decimal": 59358
+    },
+    {
+      "icon_id": "24146524",
+      "name": "16-公司",
+      "font_class": "a-16-gongsi",
+      "unicode": "e7df",
+      "unicode_decimal": 59359
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+@font-face {
+  font-family: "iconfont"; /* Project id 2793736 */
+  src: url('static/iconfont.woff2?t=1631433812401') format('woff2'),
+       url('static/iconfont.woff?t=1631433812401') format('woff'),
+       url('static/iconfont.ttf?t=1631433812401') format('truetype');
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-a-36-tianjiafankuipingzheng:before {
+  content: "\e7f3";
+}
+
+.icon-a-36-shouye-xuanzhong:before {
+  content: "\e7f2";
+}
+
+.icon-a-24-xiangqing:before {
+  content: "\e7f0";
+}
+
+.icon-a-24-tianjia:before {
+  content: "\e7f1";
+}
+
+.icon-a-24-wode-moren:before {
+  content: "\e7eb";
+}
+
+.icon-a-24-tongxunlu-xuanzhong:before {
+  content: "\e7ec";
+}
+
+.icon-a-24-tongxunlu-moren:before {
+  content: "\e7ed";
+}
+
+.icon-a-24-wode-xuanzhong:before {
+  content: "\e7ee";
+}
+
+.icon-a-24-shouye-moren:before {
+  content: "\e7ef";
+}
+
+.icon-a-20-guanbiqingkong:before {
+  content: "\e7ea";
+}
+
+.icon-a-20-gengduo:before {
+  content: "\e7e0";
+}
+
+.icon-a-20-guanzhu:before {
+  content: "\e7e1";
+}
+
+.icon-a-20-sousuo:before {
+  content: "\e7e2";
+}
+
+.icon-a-20-fanhui:before {
+  content: "\e7e3";
+}
+
+.icon-a-20-bofang:before {
+  content: "\e7e4";
+}
+
+.icon-a-20-huishouzhan:before {
+  content: "\e7e5";
+}
+
+.icon-a-20-chaoshiyincang:before {
+  content: "\e7e6";
+}
+
+.icon-a-20-jilu:before {
+  content: "\e7e7";
+}
+
+.icon-a-20-dianhua:before {
+  content: "\e7e8";
+}
+
+.icon-a-20-dingwei:before {
+  content: "\e7e9";
+}
+
+.icon-a-16-fuxuan-moren:before {
+  content: "\e7d9";
+}
+
+.icon-a-16-jiantou-shang:before {
+  content: "\e7da";
+}
+
+.icon-a-16-jiantou-you:before {
+  content: "\e7db";
+}
+
+.icon-a-16-zhuzhi:before {
+  content: "\e7dc";
+}
+
+.icon-a-16-jiantou-xia:before {
+  content: "\e7dd";
+}
+
+.icon-a-16-fuxuan-xuanzhong:before {
+  content: "\e7de";
+}
+
+.icon-a-16-gongsi:before {
+  content: "\e7df";
+}
+
