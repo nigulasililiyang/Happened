@@ -12,5 +12,11 @@ module.exports = {
 				}
 			},
 		}
+	},
+	configureWebpack:{
+		output: {
+     	 // 资源文件路径配置
+      		publicPath: './'
+    	}
 	}
 }
