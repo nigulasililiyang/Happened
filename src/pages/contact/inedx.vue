@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import {addCustomer}from '../../api/customer.js';
 import contactList from './components/contactList.vue';
 import loading from './components/loading.vue';
 export default {
@@ -213,9 +214,20 @@ export default {
 				}
 				return item;
 			});
-			uni.setStorageSync('contacts', newData);
-			this.contacts = newData;
-			this.showPopup = false;
+			const param={
+				name:this.contact.displayName,
+				Phone:this.contact.phoneNumbers[0].value,
+			};
+			addCustomer(param).then(res=>{
+				uni.showToast({
+					title:'关注成功',
+					success: () => {
+						uni.setStorageSync('contacts', newData);
+						this.contacts = newData;
+						this.showPopup = false;
+					}
+				})
+			});
 		},
 		/**
 		 * @description 从缓存中读取数据

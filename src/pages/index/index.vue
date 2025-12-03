@@ -3,7 +3,7 @@
 		<uni-nav-bar fixed statusBar @clickLeft="toAddress">
 			<view slot="left" style="padding: 0;display: flex;">
 				<u-icon name="icon iconfont icon-a-20-dingwei" style="padding-right: 8px;"></u-icon>
-				<view style="height: 48px;line-height: 48px;font-size: 16px;color: #131415;" @click="toAddress">
+				<view style="height: 48px;line-height: 48px;font-size: 16px;color: #131415;">
 					<text style="padding-right: 8px;">{{ addressName }}</text>
 					<u-icon name="icon iconfont icon-a-16-jiantou-you"></u-icon>
 				</view>
@@ -50,18 +50,14 @@ import recycle from './components/recycle.vue';
 
 export default {
 	components: { List, Important, Timeout, recycle },
+	onPullDownRefresh() {
+		this.getData();
+	},
 	created() {
-		uni.getLocation({
-			type: 'gcj02',
-			geocode: true,
-			success: res => {
-				console.log(res);
-				this.local = res;
-			}
-		});
-		getCustomerList().then(res => {
-			this.customerList = res.data ? res.data : [];
-		});
+		uni.$on("indexRefresh",()=>{
+			this.getData();
+		})
+		this.getData();
 	},
 	data() {
 		return {
@@ -79,10 +75,23 @@ export default {
 			addressName: '请选择定位',
 			local: '当前定位', //当前定位
 			showRecycle: false,
-			customerList: []
+			customerList: [],
 		};
 	},
 	methods: {
+		getData(){
+			const location = uni.getStorageSync('location');
+			// console.log(location);
+			if (location) {
+				this.addressName = location.name;
+			}
+			getCustomerList().then(res => {
+				this.customerList = res.data ? res.data : [];
+				uni.stopPullDownRefresh();
+			}).catch(()=>{
+				uni.stopPullDownRefresh();
+			});
+		},
 		change(index) {
 			this.current = index;
 		},
@@ -90,20 +99,17 @@ export default {
 			this.current = event.detail.current;
 		},
 		toAddress() {
+			const local = uni.getStorageSync('location');
 			uni.chooseLocation({
-				latitude: this.local.latitude,
-				longitude: this.local.longitude,
+				// latitude: local.latitude,
+				// longitude: local.longitude,
+				// keyword:'浙江',
 				success: res => {
+					console.log(res);
 					this.addressName = res.name;
-					console.log('位置名称：' + res.name);
-					console.log('详细地址：' + res.address);
-					console.log('纬度：' + res.latitude);
-					console.log('经度：' + res.longitude);
+					uni.setStorageSync('location', res);
 				}
 			});
-			// uni.navigateTo({
-			// 	url:'./Address'
-			// })
 		},
 		addCustomer() {
 			uni.navigateTo({
@@ -111,9 +117,8 @@ export default {
 			});
 		},
 		editCustomer(data) {
-			console.log('ssssss', data);
 			uni.navigateTo({
-				url: `components/editCustomer?id=${data.auther_id}`
+				url: `components/editCustomer?id=${data.customer_id}`
 			});
 		}
 	}

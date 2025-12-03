@@ -4,20 +4,11 @@
 			<view slot="left"><u-icon name="icon iconfont icon-a-20-fanhui"></u-icon></view>
 		</uni-nav-bar>
 		<scroll-view style="height: calc(100vh - 44px);" scroll-y>
-			<u-cell-group>
-				<u-cell-item :arrow="false" :value-style="noRight">
-					<input slot="title" placeholder="姓名" v-model="customer.name" />
-					<view slot="icon" class="left-icon">姓名</view>
-				</u-cell-item>
-				<u-cell-item :arrow="false" :value-style="noRight">
-					<input slot="title" placeholder="常用电话" type="number" v-model="customer.phone" />
-					<view slot="icon" class="left-icon">电话</view>
-				</u-cell-item>
-				<u-cell-item :arrow="false" :value-style="noRight">
-					<input slot="title" placeholder="所在公司" v-model="customer.companyname" />
-					<view slot="icon" class="left-icon">公司</view>
-				</u-cell-item>
-			</u-cell-group>
+			<view style="background: #FFFFFF;">
+				<u-field placeholder="姓名" v-model="customer.name" disabled><view slot="icon" class="left-icon">姓名</view></u-field>
+				<u-field placeholder="常用电话" type="number" v-model="customer.phone" disabled><view slot="icon" class="left-icon">电话</view></u-field>
+				<u-field placeholder="所在公司" v-model="customer.companyname"><view slot="icon" class="left-icon">公司</view></u-field>
+			</view>
 
 			<view class="form-title">
 				<u-icon name="icon iconfont icon-a-16-gongsi" style="padding-right: 8px;"></u-icon>
@@ -25,11 +16,11 @@
 			</view>
 
 			<u-cell-group>
-				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress">
+				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress('company')">
 					<input slot="title" placeholder="单位地址" style="width: calc(100vw - 48px);" disabled v-model="customer.company_address.long_lat_address_jd" />
 					<u-icon slot="right-icon" name="icon iconfont icon-a-20-dingwei" size="32"></u-icon>
 				</u-cell-item>
-				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress">
+				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight">
 					<input slot="title" placeholder="详细地址" style="width: calc(100vw - 48px);" v-model="customer.company_address.long_lat_address" />
 				</u-cell-item>
 			</u-cell-group>
@@ -40,11 +31,11 @@
 			</view>
 
 			<u-cell-group>
-				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress">
+				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress('home')">
 					<input slot="title" placeholder="家庭地址" style="width: calc(100vw - 48px);" disabled v-model="customer.home_address.long_lat_address_jd" />
 					<u-icon slot="right-icon" name="icon iconfont icon-a-20-dingwei" size="32"></u-icon>
 				</u-cell-item>
-				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress">
+				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight">
 					<input slot="title" placeholder="详细地址" style="width: calc(100vw - 48px);" v-model="customer.home_address.long_lat_address" />
 				</u-cell-item>
 			</u-cell-group>
@@ -59,27 +50,20 @@
 					</view>
 				</u-cell-item>
 			</u-cell-group>
-			<view v-for="address in customer.address_list">
+			<view v-for="(address, index) in customer.address_list">
 				<u-gap></u-gap>
 				<u-cell-group>
-					<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress">
+					<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress('other', index)">
 						<input slot="title" placeholder="地址" style="width: calc(100vw - 48px);" disabled v-model="address.long_lat_address_jd" />
 						<u-icon slot="right-icon" name="icon iconfont icon-a-20-dingwei" size="32"></u-icon>
 					</u-cell-item>
-					<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress">
+					<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight">
 						<input slot="title" placeholder="详细地址" style="width: calc(100vw - 48px);" v-model="address.long_lat_address" />
 					</u-cell-item>
 				</u-cell-group>
 			</view>
 			<u-gap></u-gap>
-
-			<u-cell-group>
-				<u-cell-item :arrow="false" title-width="100%" :value-style="noRight">
-					<view slot="title" style="width: 100%;"><input placeholder="描述" v-model="customer.remark" /></view>
-					<view slot="icon" class="left-icon">备注</view>
-				</u-cell-item>
-			</u-cell-group>
-
+			<u-field placeholder="描述" v-model="customer.remark" style="background: #FFFFFF;"><view slot="icon" class="left-icon">备注</view></u-field>
 			<u-cell-group title="记录">
 				<u-cell-item :arrow="false" @click="addRecord">
 					<view slot="title" style="font-size: 16px;color: #333333;">添加更多记录</view>
@@ -94,7 +78,7 @@
 								<template v-slot:content>
 									<view>
 										<view class="u-order-title">{{ record.remark }}</view>
-										<view class="u-order-time">{{ record.add_time }}</view>
+										<view class="u-order-time">{{ record.add_time }} <view style="float: right;width:50px;text-align: center;"><u-icon name="icon iconfont icon-a-20-gengduo"  @click="showHisEdit(record)"></u-icon></view></view>
 									</view>
 								</template>
 							</u-time-line-item>
@@ -128,13 +112,14 @@
 			<u-gap height="200"></u-gap>
 		</scroll-view>
 		<u-popup mode="bottom" v-model="showAddRecord" border-radius="32" height="85%">
-			<addRecord @cancel="showAddRecord = false" :customerId="customerId" @addSuccess="addRecordSuccess" />
+			<addRecord @cancel="showAddRecord = false" :customerId="customerId" :record="contactHistory" @addSuccess="addRecordSuccess" />
 		</u-popup>
+		<u-action-sheet :tips="offAttTips" :list="hisEditActionList" v-model="showHisEditAction" @click="hisEditActionClick" border-radius="16"></u-action-sheet>
 	</view>
 </template>
 
 <script>
-import { getContactHistory } from '../../../api/contact.js';
+import { getContactHistory,deleteContactHistory } from '../../../api/contact.js';
 import { getCustomerInfo, changeCustomerSet } from '../../../api/customer.js';
 import addRecord from './addRecord.vue';
 export default {
@@ -150,7 +135,24 @@ export default {
 			customer: { company_address: {}, home_address: {} },
 			contactHistoryList: [],
 			is_important: false, //是否重要客户，1是，0否
-			is_time_out: false //是否超时，1是，0否
+			is_time_out: false ,//是否超时，1是，0否
+			showHisEditAction:false,//是否显示记录操作
+			offAttTips: {
+				text: '',
+				color: '#999999',
+				fontSize: 28
+			},
+			hisEditActionList:[
+				{
+					text: '编辑记录',
+					color: '#333333',
+					fontSize: 32
+				},{
+					text: '删除记录',
+					color: '#E63A2E',
+					fontSize: 32
+			}],
+			contactHistory:{}
 		};
 	},
 	onLoad(option) {
@@ -159,7 +161,41 @@ export default {
 		this.getContacts();
 	},
 	methods: {
-		chooseAddress() {},
+		chooseAddress(type, value) {
+			uni.chooseLocation({
+				success: res => {
+					console.log(res);
+					switch (type) {
+						case 'company':
+							this.customer = {
+								...this.customer,
+								company_address: {
+									long_lat_address_jd: res.name,
+									long_lat_address: res.address,
+									longitude: res.longitude,
+									latitude: res.latitude
+								}
+							};
+							break;
+						case 'home':
+							this.customer = {
+								...this.customer,
+								home_address: {
+									long_lat_address_jd: res.name,
+									long_lat_address: res.address,
+									longitude: res.longitude,
+									latitude: res.latitude
+								}
+							};
+							break;
+						case 'other':
+							break;
+						default:
+							break;
+					}
+				}
+			});
+		},
 		getCustomer() {
 			getCustomerInfo(this.customerId).then(res => {
 				this.title = `${res.data.name}的信息`;
@@ -188,6 +224,7 @@ export default {
 			param.is_important = this.is_important == true ? 1 : 0;
 			param.is_time_out = this.is_time_out == true ? 1 : 0;
 			changeCustomerSet(param).then(res => {
+				uni.$emit('indexRefresh');
 				uni.showToast({
 					title: '修改成功'
 				});
@@ -211,9 +248,49 @@ export default {
 		deleteCustomer() {
 			uni.showModal({
 				title: '提示',
-				content: '确定删除联系人'
+				content: '确定删除联系人',
+				success: (res) => {
+					if(res.confirm){
+						const param={customerId: this.customerId,is_deleted:1};
+						changeCustomerSet(param).then(res=>{
+							uni.$emit('indexRefresh');
+							uni.showToast({
+								title:"删除成功",
+								success: () => {
+									uni.navigateBack({
+										delta:1
+									});
+								}
+							})
+						});
+					}
+				}
 			});
-		}
+		},
+		showHisEdit(record){
+			this.offAttTips.text = `${record.remark}`;
+			this.contactHistory=record;
+			this.showHisEditAction=true;
+		},
+		hisEditActionClick(index){
+			switch (index){
+				case 0:
+				this.showAddRecord=true;
+					break;
+					case 1:
+					deleteContactHistory({contact_history_id:this.contactHistory.id}).then(res=>{
+						uni.showToast({
+							title:'删除成功',complete: () => {
+								this.getContacts();
+								this.contactHistory={};
+							}
+						})
+					});
+						break;
+				default:
+					break;
+			}
+		},
 	}
 };
 </script>

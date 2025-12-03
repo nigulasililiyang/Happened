@@ -14,15 +14,15 @@
 		</view>
 		<scroll-view scroll-y="true" style="height: calc(85vh - 56px);">
 			<u-cell-group>
-				<u-cell-item v-for="item in 20" :arrow="false" bg-color="rgba(0,0,0,0)" hover-class="none">
+				<u-cell-item v-for="item in customerList" :arrow="false" bg-color="rgba(0,0,0,0)" hover-class="none">
 					<view slot="title" style="font-size:18px;color:#333333">
-						<text style="">张兰</text>
+						<text style="">{{item.Name}}</text>
 						<text style="padding:0 4px;color:#CCCCCC;">/</text>
-						<text>画客图像</text>
+						<text>{{item.companyname}}</text>
 					</view>
 					<view slot="label">
-						<text style="padding-right: 8px;">全景路演中心</text>
-						<text>1天前移除</text>
+						<text style="padding-right: 8px;">{{item.long_lat_address_jd}}</text>
+						<text>{{item.last_visit_time_txt}}移除</text>
 					</view>
 					<view slot="right-icon"><u-button style="font-size: 14px;height:32px;" @click="removeBack(item)">移回</u-button></view>
 				</u-cell-item>
@@ -32,12 +32,35 @@
 </template>
 
 <script>
+import { getCustomerList,changeCustomerSet } from '../../../api/customer.js';
+
 export default {
-	methods: {
-		removeBack() {
-			
+	data() {
+		return {
+			customerList: []
 		}
 	},
+	mounted() {
+		this.getData();
+	},
+	methods: {
+		getData(){
+			const param={is_deleted:1}
+			getCustomerList(param).then(res => {
+				this.customerList=res.data;
+			});
+		},
+		removeBack(item) {
+			const param={customerId:item.customer_id,is_deleted:0}
+			changeCustomerSet(param).then(res=>{
+				uni.showToast({
+					title:'成功移回',success: () => {
+						this.getData();
+					}
+				})
+			});
+		}
+	}
 };
 </script>
 

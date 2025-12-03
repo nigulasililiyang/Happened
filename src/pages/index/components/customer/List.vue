@@ -10,7 +10,7 @@
 						<text>{{item.companyname}}</text>
 					</view>
 					<view slot="label">
-						<text style="padding-right: 6px;"><u-icon name="icon iconfont icon-a-20-dingwei"></u-icon></text>
+						<view style="padding-right: 6px;"><u-icon name="icon iconfont icon-a-20-dingwei"></u-icon></view>
 						<text style="padding-right: 8px;">距你{{item.distance}}公里</text>
 						<text style="padding-right: 8px;">{{item.long_lat_address_jd}}</text>
 						<text>{{ item.last_visit_time_txt }}联系</text>

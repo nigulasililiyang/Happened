@@ -30,3 +30,32 @@ export function getContactHistory(param) {
 		}
 	});
 }
+/**
+ * @description 删除联系记录
+ * @param {Object} param
+ */
+export function deleteContactHistory(param){
+	return request({
+		url:'/linkerapi/remove_contact_history',
+		method: 'POST',
+		params: {
+			...param,
+			en_user_id: getToken()
+		}
+	});
+}
+
+/**
+ * @description 删除联系记录
+ * @param {Object} param
+ */
+export function recoveryContactHistory(param){
+	return request({
+		url:'/linkerapi/recovery_contact_history',
+		method: 'POST',
+		params: {
+			...param,
+			en_user_id: getToken()
+		}
+	});
+}

@@ -3,9 +3,9 @@
 		<uni-nav-bar left-icon="back" left-text="取消" right-text="保存" title="新建联系人" fixed statusBar @clickLeft="onLeft" @clickRight="onRight"></uni-nav-bar>
 		<scroll-view style="height: calc(100vh - 44px);" scroll-y>
 			<u-form style="background-color: #FFFFFF;">
-				<u-field placeholder="姓名"><view slot="icon" class="left-icon">姓名</view></u-field>
-				<u-field placeholder="常用电话" type="number"><view slot="icon" class="left-icon">电话</view></u-field>
-				<u-field placeholder="所在公司"><view slot="icon" class="left-icon">公司</view></u-field>
+				<u-field placeholder="姓名" v-model="customer.Name"><view slot="icon" class="left-icon">姓名</view></u-field>
+				<u-field placeholder="常用电话" type="number" v-model="customer.Phone"><view slot="icon" class="left-icon">电话</view></u-field>
+				<u-field placeholder="所在公司" v-model="customer.Company"><view slot="icon" class="left-icon">公司</view></u-field>
 			</u-form>
 
 			<view class="form-title">
@@ -14,12 +14,12 @@
 			</view>
 
 			<u-cell-group>
-				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseWork">
-					<input slot="title" placeholder="单位地址" style="width: calc(100vw - 48px);" disabled />
+				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress('company')">
+					<input slot="title" placeholder="单位地址" style="width: calc(100vw - 48px);" disabled v-model="customer.company_long_lat_address"/>
 					<u-icon slot="right-icon" name="icon iconfont icon-a-20-dingwei" size="32"></u-icon>
 				</u-cell-item>
-				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseWork">
-					<input slot="title" placeholder="详细地址" style="width: calc(100vw - 48px);" />
+				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight">
+					<input slot="title" placeholder="详细地址" style="width: calc(100vw - 48px);" v-model="customer.company_address_detail"/>
 				</u-cell-item>
 			</u-cell-group>
 
@@ -29,12 +29,12 @@
 			</view>
 
 			<u-cell-group>
-				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseHome">
-					<input slot="title" placeholder="家庭地址" style="width: calc(100vw - 48px);" disabled />
+				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseAddress('home', index)">
+					<input slot="title" placeholder="家庭地址" style="width: calc(100vw - 48px);" disabled v-model="customer.home_long_lat_address"/>
 					<u-icon slot="right-icon" name="icon iconfont icon-a-20-dingwei" size="32"></u-icon>
 				</u-cell-item>
-				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight" @click="chooseWork">
-					<input slot="title" placeholder="详细地址" style="width: calc(100vw - 48px);" />
+				<u-cell-item :arrow="false" title-width="100%" :icon-style="noRight">
+					<input slot="title" placeholder="详细地址" style="width: calc(100vw - 48px);" v-model="customer.home_address_detail"/>
 				</u-cell-item>
 			</u-cell-group>
 
@@ -51,12 +51,8 @@
 
 			<u-gap></u-gap>
 
-			<u-cell-group>
-				<u-cell-item :arrow="false" title-width="100%" :value-style="noRight">
-					<view slot="title" style="width: 100%;"><input placeholder="描述" /></view>
-					<view slot="icon" class="left-icon">备注</view>
-				</u-cell-item>
-			</u-cell-group>
+			<u-field placeholder="描述" v-model="customer.remark" style="background: #FFFFFF;"><view slot="icon" class="left-icon">备注</view></u-field>
+			
 			<u-gap></u-gap>
 			<u-cell-group>
 				<u-cell-item :arrow="false">
@@ -64,14 +60,14 @@
 						<u-icon name="icon iconfont icon-a-20-guanzhu" size="48" style="padding-right: 8px;"></u-icon>
 						设为关注
 					</view>
-					<u-switch slot="right-icon" v-model="contact.attention" active-color="#0055FF " inactive-color="#D9DADE"></u-switch>
+					<u-switch slot="right-icon" v-model="is_important" active-color="#0055FF " inactive-color="#D9DADE"></u-switch>
 				</u-cell-item>
 				<u-cell-item :arrow="false">
 					<view slot="icon" class="left-icon">
 						<u-icon name="icon iconfont icon-a-20-chaoshiyincang" size="48" style="padding-right: 8px;"></u-icon>
 						超时隐藏
 					</view>
-					<u-switch slot="right-icon" v-model="contact.attention" active-color="#0055FF " inactive-color="#D9DADE"></u-switch>
+					<u-switch slot="right-icon" v-model="is_time_out" active-color="#0055FF " inactive-color="#D9DADE"></u-switch>
 				</u-cell-item>
 			</u-cell-group>
 			<u-gap height="200"></u-gap>
@@ -80,6 +76,7 @@
 </template>
 
 <script>
+	import {addCustomer}from"../../../api/customer.js";
 export default {
 	data() {
 		return {
@@ -88,19 +85,71 @@ export default {
 			},
 			noRight: {
 				width: '0px'
-			}
+			},
+			customer: { },
+			is_important: false, //是否重要客户，1是，0否
+			is_time_out: false //是否超时，1是，0否
+			
 		};
 	},
 	methods: {
+		chooseAddress(type, value) {
+			uni.chooseLocation({
+				success: res => {
+					console.log(res);
+					switch (type) {
+						case 'company':
+							this.customer = {
+								...this.customer,
+								// company_address: {
+									company_address_detail : res.name,
+									company_long_lat_address: res.address,
+									company_longitude: res.longitude,
+									company_latitude: res.latitude
+								// }
+							};
+							break;
+						case 'home':
+							this.customer = {
+								...this.customer,
+								// home_address: {
+									home_address_detail: res.name,
+									home_long_lat_address: res.address,
+									home_longitude: res.longitude,
+									home_latitude: res.latitude
+								// }
+							};
+							break;
+						case 'other':
+							break;
+						default:
+							break;
+					}
+				}
+			});
+		},
 		onLeft() {
 			uni.navigateBack({
 				delta: 1
 			});
 		},
 		onRight() {
-			uni.navigateBack({
-				delta: 1
-			});
+			var param = this.$u.deepClone(this.customer);
+			param.is_important = this.is_important == true ? 1 : 0;
+			param.is_time_out = this.is_time_out == true ? 1 : 0;
+			console.log(param);
+			addCustomer(param).then(res=>{
+				uni.showToast({
+					title:'添加成功',
+					success: () => {
+						setTimeout(()=>{
+							uni.navigateBack({
+								delta: 1
+							});
+						}, 1000);
+					}
+				})	
+			});	
 		}
 	}
 };
